@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="lib/roulette.js-master/sample/bootstrap.css"></link>
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/ui-lightness/jquery-ui.css">
+<link rel="stylesheet" href="lib/roulette.js-master/sample/bootstrap-responsive.css"></link>
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/ui-lightness/jquery-ui.css">
+<link rel="stylesheet" href="lib/roulette.js-master/sample/demo.css"></link>
+</head>
+<body>
+	<!-- <h2>welcome</h2> -->
+	
+	<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+					<a class="brand" href="./">Roulette.js</a>
+					<div class="nav-collapse collapse" id="main-menu">
+						<ul class="nav pull-right" id="main-menu-right">
+							<li><a rel="tooltip" target="_blank" href="https://github.com/akira-kuriyama/roulette.js" >Github<i class="icon-share-alt"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="page-header" style="">
+				<h1>
+					Roulette.js DEMO
+				</h1>
+			</div>
+
+			<div class="row">
+				<div class="span4">
+					<div class="roulette_container" >
+						<div class="roulette" style="display:none;">
+							<img src="images/헬스3개월.png"/>
+							<!-- <img src="lib/roulette.js-master/sample/star.png"/> -->
+							<img src="lib/roulette.js-master/sample/flower.png"/>
+							<img src="lib/roulette.js-master/sample/coin.png"/>
+							<img src="lib/roulette.js-master/sample/mshroom.png"/>
+						</div>
+<!-- 						<div class="roulette" style="display:none;">
+							<img src="lib/roulette.js-master/sample/star.png"/>
+							<img src="lib/roulette.js-master/sample/flower.png"/>
+							<img src="lib/roulette.js-master/sample/coin.png"/>
+							<img src="lib/roulette.js-master/sample/mshroom.png"/>
+							<img src="lib/roulette.js-master/sample/chomp.png"/>
+						</div> -->
+					</div>
+					<div class="btn_container">
+						<p>
+						<button class="btn btn-large btn-primary start"> START </button>
+						<button class="stop btn-large btn btn-warning"> STOP </button>
+						</p>
+					</div>
+					<div class="log_container">
+						<p class="demo_label">Log</p>
+						<div id="msg">
+						</div>
+					</div>
+				</div>
+				<div class="span4">
+					<div class="right_container">
+						<p class="demo_label">Paramater</p>
+						<div class="speed_value param_label">
+							<span class="param_name">speed :</span> <span class="speed_param"></span>
+						</div>
+						<div id="speed"> </div>
+
+						<div class="duration_value param_label">
+							<span class="param_name">duration :</span> <span class="duration_param"></span>
+						</div>
+						<div id="duration"> </div>
+
+						<div class="stop_image_number_value param_label">
+							<span class="param_name">stop image number :</span> <span class="stop_image_number_param"></span>
+						</div>
+						<input id="stopImageNumber" name="stopImageNumber"/>
+						<span class="image_sample">
+							<img data-value="0"  src="lib/roulette.js-master/sample/star.png"/>
+							<img data-value="1"  src="lib/roulette.js-master/sample/flower.png"/>
+							<img data-value="2"  src="lib/roulette.js-master/sample/coin.png"/>
+							<img data-value="3"  src="lib/roulette.js-master/sample/mshroom.png"/>
+							<img data-value="4"  src="lib/roulette.js-master/sample/chomp.png"/>
+							<img data-value="-1" src="lib/roulette.js-master/sample/random.png" title="random"/>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+			
+<script type="text/javascript">
+
+/* const test = Math.floor(Math.random() * 6);
+console.log(test); */
+
+var choices = [
+  [1, "헬스3개월"],
+  [5, "헬스2개월"],
+  [15, "헬스1개월"],
+  [30, "헬스10일"],
+  [70, "보충제"],
+  [100, "음료수"] 
+],
+rand, min, max, i, i2, choice;
+
+function between(x, min, max) {
+  return x >= min && x <= max;
+}
+
+function pickChoice() {
+
+	rand = Math.floor(Math.random() * 100);
+	choice = -1;
+	
+	for (i = 0; i < choices.length; i++) {
+	
+		// set up min
+		if (i === 0) {
+			min = 0;
+		} else {
+			min = 0;
+			// add up all the values so far
+			for (i2 = 0; i2 < i; i2++) {
+			  min += choices[i2][0];
+			}
+			// one higher
+			min++;
+		}
+		
+		// set up max
+		if (i === 0) {
+			max = choices[i][0];
+		} else {
+			max = 0;
+			// add up all the values so far
+			for (i2 = 0; i2 < i + 1; i2++) {
+				max += choices[i2][0];
+			}
+		}
+		
+		if (rand >= min && rand <= max) {
+			choice = i;
+			break;
+		}
+	
+	}
+	
+	// If the choice is still -1 here, something went wrong...
+};
+
+pickChoice();
+//alert(choices[choice][1]);
+
+</script>
+	
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
+<script src="lib/roulette.js-master/roulette.js"></script>
+<script src="lib/roulette.js-master/sample/demo.js"></script>
+</body>
+</html>
